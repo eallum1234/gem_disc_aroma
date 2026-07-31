@@ -81,7 +81,7 @@ export function ProfileGraph({ graphKey, graphLabel, title, scores }: Props) {
         ))}
 
         <g>
-          <text x="48" y="372" className="score-box-label">구분란</text>
+          <text x="58" y="372" className="score-box-label">구분</text>
           {points.map((point) => (
             <g key={point.style}>
               <rect x={point.x - 28} y="354" width="56" height="28" rx="2" className="score-box" />
