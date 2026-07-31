@@ -125,6 +125,11 @@ main {
   font-weight: 800;
 }
 
+.error-text {
+  color: #a33a2c !important;
+  font-weight: 800;
+}
+
 .layout {
   display: grid;
   gap: 16px;
@@ -413,6 +418,141 @@ main {
 
 .style-C {
   background: #386fa4;
+}
+
+.profile-graph-card {
+  background: #ffffff;
+  border: 1px solid #d5e0ea;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(32, 50, 58, 0.04);
+  overflow: hidden;
+}
+
+.profile-graph-title {
+  align-items: center;
+  background: #2f5f9f;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+}
+
+.profile-graph-title span {
+  font-weight: 900;
+}
+
+.profile-graph-title strong {
+  font-size: 14px;
+}
+
+.profile-graph-svg {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.graph-frame {
+  fill: #fbfdff;
+  stroke: #bfd1e3;
+  stroke-width: 1.5;
+}
+
+.disc-header {
+  fill: #244f91;
+}
+
+.disc-header-text {
+  fill: #ffffff;
+  font-size: 27px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.graph-column-line {
+  stroke: #285c99;
+  stroke-width: 1.4;
+}
+
+.graph-grid {
+  stroke: #91add0;
+  stroke-width: 1;
+}
+
+.graph-grid.dashed {
+  stroke-dasharray: 5 4;
+}
+
+.graph-zero-line {
+  stroke: #17212b;
+  stroke-dasharray: 4 3;
+  stroke-width: 1.5;
+}
+
+.graph-tick {
+  fill: #38607f;
+  font-size: 12px;
+  font-weight: 800;
+  text-anchor: end;
+}
+
+.profile-line {
+  fill: none;
+  stroke: #17212b;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.profile-dot {
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.dot-D {
+  fill: #ca4a36;
+}
+
+.dot-i {
+  fill: #d49422;
+}
+
+.dot-S {
+  fill: #2e8b73;
+}
+
+.dot-C {
+  fill: #386fa4;
+}
+
+.profile-value {
+  fill: #17212b;
+  font-size: 13px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.score-box {
+  fill: #ffffff;
+  stroke: #2f5f9f;
+  stroke-width: 1.4;
+}
+
+.score-box-label,
+.score-box-text,
+.profile-note {
+  fill: #244f91;
+  font-size: 13px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.score-box-label {
+  text-anchor: end;
+}
+
+.profile-note {
+  fill: #61717a;
+  font-size: 12px;
 }
 
 .interpretation-grid {
