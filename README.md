@@ -39,6 +39,7 @@ Create `.env.local` from `.env.example`.
 ```text
 VITE_SUPABASE_URL=https://your-project-id.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=your_publishable_or_anon_public_key
+VITE_INSTRUCTOR_PASSWORD=change_this_password
 ```
 
 Run the app.
@@ -78,6 +79,7 @@ In GitHub:
 ```text
 VITE_SUPABASE_URL
 VITE_SUPABASE_PUBLISHABLE_KEY
+VITE_INSTRUCTOR_PASSWORD
 ```
 
 6. Push to the `main` branch.
