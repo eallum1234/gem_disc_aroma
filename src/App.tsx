@@ -3,7 +3,6 @@ import {
   Clipboard,
   Download,
   FileDown,
-  Home,
   Plus,
   Printer,
   Save,
@@ -293,13 +292,16 @@ export function App() {
           <h1>{mode === "take" ? "참여자 검사 화면" : "강사용 검사 관리 화면"}</h1>
         </div>
         <div className="header-actions">
-          <button onClick={() => switchMode("instructor")}><Home size={18} /> 강사용</button>
-          {selectedSession && <button onClick={() => switchMode("take", selectedSession.id)}><Users size={18} /> 참여자 화면</button>}
-          <button onClick={exportJson}><Download size={18} /> 백업</button>
-          <label className="button-like">
-            <Upload size={18} /> 복원
-            <input type="file" accept="application/json" onChange={importJson} />
-          </label>
+          {mode === "instructor" && (
+            <>
+              {selectedSession && <button onClick={() => switchMode("take", selectedSession.id)}><Users size={18} /> 참여자 화면</button>}
+              <button onClick={exportJson}><Download size={18} /> 백업</button>
+              <label className="button-like">
+                <Upload size={18} /> 복원
+                <input type="file" accept="application/json" onChange={importJson} />
+              </label>
+            </>
+          )}
           <button onClick={() => window.print()}><Printer size={18} /> 인쇄</button>
         </div>
       </header>
@@ -316,7 +318,6 @@ export function App() {
           onAnswer={(questionId, field, optionId) => {
             if (joinedParticipant) setParticipantAnswer(joinedParticipant.id, questionId, field, optionId);
           }}
-          onBack={() => switchMode("instructor", selectedSession?.id)}
         />
       ) : (
         <InstructorMode
@@ -551,13 +552,12 @@ function ParticipantMode(props: {
   setParticipantTeam: (value: string) => void;
   onJoin: () => void;
   onAnswer: (questionId: number, field: "most" | "least", optionId: string) => void;
-  onBack: () => void;
 }) {
   if (!props.session) {
     return (
       <section className="empty-state">
         <h2>검사 주소가 올바르지 않습니다.</h2>
-        <button onClick={props.onBack}>강사용 화면으로 돌아가기</button>
+        <p className="helper-text">강사에게 받은 참여자 주소로 다시 접속해 주세요.</p>
       </section>
     );
   }
@@ -572,7 +572,6 @@ function ParticipantMode(props: {
           <input value={props.participantName} onChange={(event) => props.setParticipantName(event.target.value)} placeholder="이름" />
           <input value={props.participantTeam} onChange={(event) => props.setParticipantTeam(event.target.value)} placeholder="소속 / 팀" />
           <button className="primary" onClick={props.onJoin}>검사 시작</button>
-          <button onClick={props.onBack}>강사용 화면으로 돌아가기</button>
         </div>
       </section>
     );
