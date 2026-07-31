@@ -10,6 +10,7 @@ import {
   Upload,
   Users
 } from "lucide-react";
+import { ProfileGraph } from "./components/ProfileGraph";
 import { ScoreBars } from "./components/ScoreBars";
 import { interpretations, styleNames } from "./data/interpretations";
 import { questionnaire } from "./data/questionnaire";
@@ -658,9 +659,9 @@ function ParticipantWorkspace({
       </section>
 
       <section className="grid three print-results">
-        <ScoreBars title="Graph I · Most" scores={result.most} min={0} max={28} />
-        <ScoreBars title="Graph II · Least" scores={result.least} min={0} max={28} />
-        <ScoreBars title="Graph III · Most - Least" scores={result.graph3} />
+        <ProfileGraph graphKey="I" graphLabel="그래프 I" title="Most" scores={result.most} />
+        <ProfileGraph graphKey="II" graphLabel="그래프 II" title="Least" scores={result.least} />
+        <ProfileGraph graphKey="III" graphLabel="그래프 III" title="Most - Least" scores={result.graph3} />
       </section>
 
       <section className="panel interpretation">
