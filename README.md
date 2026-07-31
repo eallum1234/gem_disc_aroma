@@ -63,6 +63,38 @@ http://localhost:5173/?mode=instructor
 
 Do not commit `.env.local` to GitHub.
 
+## GitHub Pages Deployment
+
+This project includes `.github/workflows/deploy.yml`.
+
+In GitHub:
+
+1. Open the repository.
+2. Go to `Settings` -> `Pages`.
+3. Set `Source` to `GitHub Actions`.
+4. Go to `Settings` -> `Secrets and variables` -> `Actions`.
+5. Add these repository secrets:
+
+```text
+VITE_SUPABASE_URL
+VITE_SUPABASE_PUBLISHABLE_KEY
+```
+
+6. Push to the `main` branch.
+7. Open the `Actions` tab and wait for `Deploy to GitHub Pages` to finish.
+
+The site URL will look like:
+
+```text
+https://YOUR_GITHUB_ID.github.io/YOUR_REPOSITORY_NAME/
+```
+
+Instructor screen:
+
+```text
+https://YOUR_GITHUB_ID.github.io/YOUR_REPOSITORY_NAME/?mode=instructor
+```
+
 ## App Flow
 
 1. Instructor opens the instructor screen.
