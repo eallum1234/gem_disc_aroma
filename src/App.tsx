@@ -19,6 +19,8 @@ import { downloadText, loadSessions, loadSharedSessions, saveSharedSessions } fr
 import { Answer, DiscStyle, Participant, Session } from "./types";
 
 const styles: DiscStyle[] = ["D", "i", "S", "C"];
+const INSTRUCTOR_PASSWORD = import.meta.env.VITE_INSTRUCTOR_PASSWORD || "1234";
+const INSTRUCTOR_AUTH_KEY = "pps-disc-instructor-authenticated";
 
 function uid(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -85,6 +87,7 @@ export function App() {
   const [copied, setCopied] = useState("");
   const [sharedStatus, setSharedStatus] = useState<"checking" | "connected" | "local">("checking");
   const [loadedSharedData, setLoadedSharedData] = useState(false);
+  const [instructorUnlocked, setInstructorUnlocked] = useState(() => sessionStorage.getItem(INSTRUCTOR_AUTH_KEY) === "true");
 
   useEffect(() => {
     let alive = true;
@@ -320,6 +323,13 @@ export function App() {
             if (joinedParticipant) setParticipantAnswer(joinedParticipant.id, questionId, field, optionId);
           }}
         />
+      ) : !instructorUnlocked ? (
+        <InstructorPasswordGate
+          onUnlock={() => {
+            sessionStorage.setItem(INSTRUCTOR_AUTH_KEY, "true");
+            setInstructorUnlocked(true);
+          }}
+        />
       ) : (
         <InstructorMode
           sessions={sessions}
@@ -358,6 +368,40 @@ export function App() {
         />
       )}
     </main>
+  );
+}
+
+function InstructorPasswordGate({ onUnlock }: { onUnlock: () => void }) {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (password === INSTRUCTOR_PASSWORD) {
+      setError("");
+      onUnlock();
+      return;
+    }
+    setError("비밀번호가 맞지 않습니다.");
+  }
+
+  return (
+    <section className="join-screen">
+      <form className="join-card" onSubmit={submit}>
+        <p className="eyebrow">Instructor access</p>
+        <h2>강사용 화면 비밀번호</h2>
+        <p>참여자 현황과 팀 분석을 보려면 강사용 비밀번호를 입력하세요.</p>
+        <input
+          autoFocus
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="비밀번호"
+        />
+        {error && <p className="error-text">{error}</p>}
+        <button className="primary" type="submit">강사용 화면 열기</button>
+      </form>
+    </section>
   );
 }
 
